@@ -1,0 +1,63 @@
+<nav>
+    <ul class="logo">
+      <li><a  href="{% url 'notes'%}"> <strong >Notes 2.0</strong> </a></li>
+      <li ><a  href="{% url 'home' %}">Home</a></li>
+      <li ><a  href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'logout'%}">Logout</a></li>
+      <li class="nav-item">
+        <label class="switch">
+          <input type="checkbox" role="switch" id="flexSwitch" checked onclick="themeMode()">
+          <span class="slider"></span>
+        </label>
+      </li>
+      {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'adminResponse' %}" >Panel</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  
+  
+  <style>
+    nav {
+    background-color:#ffffff;
+    color: #5500cb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  li {
+    margin: 0 0.5rem;
+  }
+  
+  a {
+    color: #5500cb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+  }
+  .logo {
+font-size: 22px;
+font-weight: 600;
+color: 5500cb;
+}
+  
+  a:hover {
+    color: black;
+  }
+
+  .notes{
+    background-color: black;
+  }
+  
+  </style>

@@ -1,0 +1,15 @@
+{% extends 'index.html' %} {% block content %}
+<h1>Leaderboard</h1>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Coins</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>{{user.name}}</td>
+    <td>{{request.user.coins_scored}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

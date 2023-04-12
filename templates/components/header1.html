@@ -1,0 +1,88 @@
+{% load static %}
+<nav class="navbar navbar-light" style="background-color: #ffffff;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'notes' %}" style="color: #6a0dad;">Notes 2.0</a>
+    {% if user.is_authenticated %}
+    <table class="coins">
+      <th>
+        <img src="{% static 'images/coin.png' %}" alt="">
+      </th>
+      <th>
+        <p class="cna" style="color: white;">{{ user.coins_scored }}</p>
+      </th>
+    </table>
+    {% endif %}
+    <button class="navbar-toggler-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'adminResponse' %}" style="color: #6a0dad;">Panel</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <label class="switch">
+            <input type="checkbox" role="switch" id="flexSwitch" checked onclick="themeMode()">
+            <span class="slider"></span>
+          </label>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="color: #6a0dad;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'notes' %}" style="color: #6a0dad;">Notes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}" style="color: #6a0dad;">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}" style="color: #6a0dad;">Log-Out</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    border: 0.2px solid white;
+  }
+
+  .coins {
+    margin-left: 75%;
+    width: 3px;
+  }
+
+  .cna {
+    margin-top: 12px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 980px) {
+    .coins {
+      margin-left: 10%;
+    }
+  }
+ 
+  .navbar-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-item {
+  margin-right: 20px;
+}
+
+.nav-link {
+  color: purple !important;
+}
+
+
+</style>

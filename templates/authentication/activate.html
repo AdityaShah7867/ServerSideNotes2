@@ -1,0 +1,25 @@
+
+{% autoescape off %}
+
+
+    Dear {{user.name}},
+
+    Thank you for signing up for our NotesBeta!
+    To ensure the security of your account and protect your information,
+    we require all users to verify their email address.
+
+    Please click on the verification link below to complete the registration process and gain access to your account:
+
+    http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+   If you did not register for an account on our website,
+   please ignore this email and contact us immediately at notes.vcet@gmail.com.
+
+   Thank you for choosing NotesBeta. We look forward to providing you with a great user experience!
+
+Best regards,
+Team NotesBeta.
+
+
+
+{% endautoescape %}

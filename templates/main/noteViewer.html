@@ -1,0 +1,179 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+{% include 'authentication/messages.html' %}
+  <div class="d-flex align-items-center mb-3">
+    <a href="{% url 'notes' %}" class="btn btn-primary mr-3">Back</a>
+
+    <form action="{% url 'like_notes' note.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user in note.likes.all %}
+      <button type="submit" class="btn btn-primary liked" style="margin-left: 10px; margin-right: 10px;">
+        <span class="heart-icon">&hearts;</span> {{ note.likes.count }} Liked
+      </button>
+      {% else %}
+      <button type="submit" class="btn btn-primary like" style="margin-left: 10px; margin-right: 10px;">
+        <span class="heart-icon">&hearts;</span> {{ note.likes.count }} Like
+      </button>
+      {% endif %}
+    </form>
+
+    {% if is_bookmarked %}
+    <form method="POST" action="{% url 'notesViewer' note.slug %}">
+      {% csrf_token %}
+      <button type="submit" name="bookmark" value="remove" class="btn btn-danger">
+        <i class="fa fa-bookmark" aria-hidden="true"></i><i class="fa fa-bookmark-o" aria-hidden="true"></i>
+        <!--<svg-->
+        <!--            xmlns="http://www.w3.org/2000/svg"-->
+        <!--            width="24"-->
+        <!--            height="24"-->
+        <!--            viewBox="0 0 24 24"-->
+        <!--          >-->
+        <!--          <path fill="currentColor" d="M19 0H5C3.9 0 3 .9 3 2v20l9-5.2L21 22V2c0-1.1-.9-2-2-2z"/>-->
+        <!--          </svg> -->
+                  &nbsp; Remove Bookmark
+      </button>
+    </form>
+    {% else %}
+    <form method="POST" action="{% url 'notesViewer' note.slug %}">
+      {% csrf_token %}
+      <button type="submit" name="bookmark" value="add" class="btn btn-primary">
+        <!--<i class="fa fa-bookmark-o" aria-hidden="true"></i>  -->
+        <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                  <path fill="currentColor" d="M19 0H5C3.9 0 3 .9 3 2v20l9-5.2L21 22V2c0-1.1-.9-2-2-2z"/>
+                  </svg>Add Bookmark
+      </button>
+    </form>
+    {% endif %}
+
+
+  </div>
+
+
+
+
+
+
+<div class="row">
+  <iframe src="{{ note.docid }}" width="840" height="980" allow="autoplay"></iframe>
+</div>
+
+<br>
+<br><br><br>
+  <h1 style="text-align: center;">Q and A Section</h1>
+  <hr><br>
+
+
+
+<br>
+  <div class="row">
+
+    <form action="{{note.comnt}}" method="post">
+      {% csrf_token %}
+      <label for="">Add Question</label>
+      <input type="text" name="cmnt" id="">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <hr>
+  <div class="row">
+    <h3>QUESTIONS {{total_comments}}</h3>
+    {% for x in cmnt %}
+      <p>{{x.fromU.name}} : {{x.cmnt}}</p>
+      <p>{{x.cmntDate}}</p>
+
+      <p><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
+        Answer
+      </button>
+      <a href="{{x.seeR}}"><button type="button" class="btn btn-warning" data-bs-toggle="modal" >View Answers</button></a>
+
+      </p>
+    {% endfor %}
+    {% for x in cmntR %}
+
+    <p>Reply from : {{x.frR}}</p>
+    <p style="font-size: 30px;"></p>
+{% endfor %}
+
+
+    <div class="row" style="margin-top: 5%; ">
+
+
+  </div>
+<!--  -->
+
+
+  </div>
+</div>
+
+
+{% for x in cmnt %}
+<div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Reply to {{x.fromU.name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{x.reply}}" method="post">
+          {% csrf_token %}
+          <p>Type Your Below</p>
+          <input type="text" name="cmntR">
+          <button type="submit" class="btn btn-primary">Answer</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for x in cmnt %}
+<div class="modal fade" id="exampleModal{{foreply.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"Answer section  of {{note}}
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       {% for x in cmnt %}
+
+            <p>Reply from : {{x.frR}}</p>
+            <p style="font-size: 30px;">{{x.cmntR}}</p>
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+<!-- Add the following script tag to the end of the HTML file to include the Bootstrap Icons library -->
+<!-- <script src="https://unpkg.com/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-Dmuy79bF9lhxtZnL5ue5emfj5d6yjiw6yPtbvuUeQYU1M9X9QV/YtkjL/e90RgkP"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/bootstrap-icons.min.js"></script> -->
+{% endblock %}
+
+
+
+<div class="row">
+  <iframe src="{{ x.docid }}" width="840" height="980" allow="autoplay"></iframe>
+</div>

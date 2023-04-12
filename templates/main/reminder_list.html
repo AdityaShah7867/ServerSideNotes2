@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 960px;
+    margin-top: 3%;
+    align-items: center;
+    align-content: center;
+    border-radius: 2px;
+    border-color: aqua;
+    /* Center the container horizontally */
+    padding: 0 20px;
+    /* Add some padding to the container */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+  }
+</style>
+<center>
+<div class="container">
+  <h1>Reminders</h1>
+  <!-- <button class="view">View All</button> -->
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reminder in reminders %}
+        <tr>
+          <td>{{ reminder.title }}</td>
+          <td>{{ reminder.due_date }}</td>
+          <td>{{ reminder.description }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</center>
+
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<form class="d-flex" method="post" role="search" action="{% url 'searchNotes' %}">
+
+    {% csrf_token %}
+
+        <!-- <input id="autocomplete" class="autocomplete form-control me-2" type="text" name="searchQ" placeholder="Search" aria-label="Search"> -->
+        <div id="autocomplete" class="autocomplete input-group mb-3">
+            <input class="form-control me-2" type="text" name="searchQ" placeholder="Search" aria-label="Search"/>
+            <ul class="autocomplete-result-list"></ul>
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <!-- <button type="button" class="btn btn-outline-primary ms-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Filter
+                </button> -->
+            </div>
+           
+        </div>
+   
+
+    
+    
+    
+</form>

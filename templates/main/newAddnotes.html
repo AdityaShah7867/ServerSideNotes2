@@ -1,0 +1,303 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    
+</head>
+
+
+
+<body >
+
+<!-- <div class="bg-white dark:bg-black"> -->
+    <section class="new-forrm " >
+
+        <div class="mt-10 sm:mt-5 w-auto">
+
+            <div class="mt-5 md:mt-1 md:col-span-2">
+                <form action="#" method="POST">
+                    <div class="shadow overflow-hidden sm:rounded-md">
+                        <div class="px-3 py-3 bg-white sm:p-3">
+                            <div class="grid grid-cols-1 gap-6 ">
+
+
+
+                                <div class="col-span-4 sm:col-span-4 ">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">SUBJECT</label>
+                                    <select id="country" name="country" autocomplete="country"
+                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option></option>
+                                        <option>COA</option>
+                                        <option>AT</option>
+                                        <option>CNND</option>
+                                        <option>OS</option>
+                                        <option>EM-IV</option>
+                                        <option>PY</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-4 sm:col-span-4 ">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">MODULE</label>
+                                    <select id="country" name="country" autocomplete="country"
+                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-4 sm:col-span-4 ">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Type</label>
+                                    <select id="country" name="country" autocomplete="country"
+                                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option></option>
+                                        <option>Assignment</option>
+                                        <option>Notes</option>
+                                        <option>Refernce book</option>
+                                        <option>PYQS</option>
+                                        <option>Lecture slides</option>
+                                        <option>Exp</option>
+                                    </select>
+                                </div>
+
+
+                                <!--
+                    <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                      <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                      <input type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+      
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                      <input type="text" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+      
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
+                      <input type="text" name="postal_code" id="postal_code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+                  </div>
+                </div>
+                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Save
+                  </button> -->
+                            </div>
+                        </div>
+                        <form class="form">
+
+                            <label for="file-input" class="drop-container">
+                                <span class="drop-title">Drop files here</span>
+                                or
+                                <input type="file" accept="image/*" required="" id="file-input">
+                            </label>
+                            <div>
+                           <br>
+                                <button class="hbtn">
+                                    <div class="svg-wrapper-1">
+                                      <div class="svg-wrapper">
+                                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M0 0h24v24H0z" fill="none"></path>
+                                          <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                    <span>Send</span>
+                                </button>
+                                
+                        </form>
+
+                </form>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+
+    <style>
+        .hbtn {
+            /* margin-top: 40px;
+            margin-left: 40%; */
+            /* margin-top: 50px; */
+            /* margin: auto; */
+            
+            margin: auto;
+            justify-content: center;
+            font-family: inherit;
+            font-size: 20px;
+            background: royalblue;
+            color: white;
+            padding: 0.7em 1em;
+            padding-left: 0.9em;
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .hbtn span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hbtn svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hbtn:hover .svg-wrapper {
+            animation: fly-1 0.6s ease-in-out infinite alternate;
+        }
+
+        .hbtn:hover svg {
+            transform: translateX(1.2em) rotate(45deg) scale(1.1);
+        }
+
+        .hbtn:hover span {
+            transform: translateX(5em);
+        }
+
+        .hbtn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fly-1 {
+            from {
+                transform: translateY(0.1em);
+            }
+
+            to {
+                transform: translateY(-0.1em);
+            }
+        }
+
+        .new-forrm {
+            margin-top: 10rem;
+            top: 50;
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+
+        .form {
+            background-color: #fff;
+            box-shadow: 0 10px 60px rgb(218, 229, 255);
+            border: 1px solid rgb(159, 159, 160);
+            border-radius: 20px;
+            padding: 2rem .7rem .7rem .7rem;
+            text-align: center;
+            font-size: 1.125rem;
+            max-width: 320px;
+        }
+
+        .form-title {
+            color: #000000;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        .form-paragraph {
+            margin-top: 10px;
+            font-size: 0.9375rem;
+            color: rgb(105, 105, 105);
+        }
+
+        .drop-container {
+            background-color: #fff;
+            position: relative;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            margin-top: 2.1875rem;
+            border-radius: 10px;
+            border: 2px dashed rgb(171, 202, 255);
+            color: #444;
+            cursor: pointer;
+            transition: background .2s ease-in-out, border .2s ease-in-out;
+        }
+
+        .drop-container:hover {
+            background: rgba(0, 140, 255, 0.164);
+            border-color: rgba(17, 17, 17, 0.616);
+        }
+
+        .drop-container:hover .drop-title {
+            color: #222;
+        }
+
+        .drop-title {
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            transition: color .2s ease-in-out;
+        }
+
+        #file-input {
+            width: 350px;
+            max-width: 100%;
+            color: #444;
+            padding: 2px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid rgba(8, 8, 8, 0.288);
+        }
+
+        #file-input::file-selector-hbtn {
+            margin-right: 20px;
+            border: none;
+            background: #084cdf;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+        }
+
+        #file-input::file-selector-hbtn:hover {
+            background: #0d45a5;
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+
+{% endblock %}
+<!-- 
+</html> -->

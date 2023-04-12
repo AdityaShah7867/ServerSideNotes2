@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/card.css' %}" />
+<link href="{% static 'images/notees.png' %}" rel="icon" type="image/x-icon" >
+<div class="container notesCnt mt-4 mb-4 ">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="container-lg-6">
+      {% include 'components/search.html' %}
+    </div>
+    <!-- <div class="container-lg-6">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <form method="get">
+                        {{ notes.form|crispy }}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit">Filter</button>
+                          </div>
+                       </form>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+
+        </div> -->
+
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center">
+    {% for x in notes %}
+    <div class="card cardImg mx-4 my-4" style="width: 22rem; height: 16em; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 60%),url('{{x.sub.img.url}}');">
+
+      <div class="card-body">
+        <div class="text-block">
+          <h1>{{x.sub}} <small>MOD : {{x.mod}}</small></h1>
+          <h3>{{x.typeN}}</h3>
+          <p>
+            LIKES: {{x.likes.count}}
+
+
+            <br>
+            CREDIT : {{x.author.name}}
+          </p>
+          {% if request.user in x.buy.all %}
+          <form method="POST" action="{% url 'notesViewer' x.slug %}">
+            {% csrf_token %}
+            <a href="{{x.slug}}" class="card-link">
+              <button type="submit" class="btn btn-success">View PDF</button>
+            </a>
+          </form>
+
+          {% else %}
+          <form action="{% url 'buy_notes' x.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="note_id" value="{{x.note_id}}">
+            <button class="btn btn-primary" type="submit">Buy Notes</button>
+          </form>
+          {% endif %}
+
+        </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+  {% include 'components/notesBottomNav.html' %}
+
+  {% endblock %}

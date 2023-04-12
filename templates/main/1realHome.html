@@ -1,0 +1,144 @@
+{% extends 'index.html' %} {% block content %} {% load crispy_forms_tags %}
+{%load static %}
+
+<link rel="stylesheet" href="{% static 'css/newcard.css' %}" />
+
+<div class="container notesCnt mt-4">
+  {% include 'authentication/messages.html' %}
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="container-lg-6">
+      <form
+        class="d-flex"
+        method="post"
+        role="search"
+        action="{% url 'searchNotes' %}"
+      >
+        {% csrf_token %}
+
+        <!-- <input id="autocomplete" class="autocomplete form-control me-2" type="text" name="searchQ" placeholder="Search" aria-label="Search"> -->
+        <div id="autocomplete" class="autocomplete input-group mb-3">
+          <input
+            class="form-control me-2"
+            type="text"
+            name="searchQ"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <ul class="autocomplete-result-list"></ul>
+
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary ms-1"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Filter
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container-lg-6">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Modal title
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form method="get">
+                {{ notes.form|crispy }}
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button class="btn btn-primary" type="submit">Filter</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row d-flex justify-content-center align-items-center">
+    {% for x in notes.qs %}
+      <div class="card mt-4 mx-4" style="width: 18rem">
+        <div class="card-body">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img
+                  src="{{x.sub.img.url}}"
+                  width="0.5px"
+                  ,
+                  class="img-fluid d-block w-100"
+                  alt="..."
+                />
+                <h5 class="card-title">{{x.sub}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted2 ttye" style="color: red;">{{x.typeN}}</h6>
+                <h6 class="card-subtitle mb-2">Module No: {{x.mod}}</h6>
+
+              </div>
+              <div class="flip-card-back">
+                <h6 class="card-subtitle mb-2 text-muted">{{x.typeN}}</h6>
+                <p class="card-text">Credit : {{x.author.name}}</p>
+
+                {% if request.user in x.buy.all %}
+                <form method="POST" action="{% url 'notesViewer' x.slug %}">
+                  {% csrf_token %}
+                  <a href="{{x.slug}}" class="card-link">
+                    <button type="submit" class="btn btn-success">View PDF</button>
+                  </a>
+                </form>
+
+                {% else %}
+                  <form action="{% url 'buy_notes' x.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="note_id" value="{{x.note_id}}">
+                    <button class="btn btn-primary" type="submit">Buy Notes</button>
+                  </form>
+                {% endif %}
+                <strong><p>{{x.likes.count}} Likes ♥️</p>
+                  <p>{{ x.views }} views</p>
+
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+
+  </div>
+</div>
+
+{% include 'components/notesBottomNav.html' %} {% endblock %}
+

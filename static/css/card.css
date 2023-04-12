@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Rubik:400,900);
+
+/*
+body {
+
+	transform-style:preserve-3d;
+	transform:perspective(800px);
+	font-family:'Lato', Sans-serif;
+} */
+.cardImg{
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 60%),url('1.jpg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+    box-shadow:0px 45px 100px rgba(0, 0, 0, 0.4), inset 0 0 0 1000px rgba(0, 76, 86, 0.1);
+    color:#fff;
+    text-shadow:0 3 10 rgba(0, 0, 0, 0.7);
+}
+
+.cardImg .text-block {
+  /*position:relative;*/
+  /*z-index:2;*/
+  text-shadow:0 3 10 rgba(0, 0, 0, 0.7);
+}
+.cardImg .text-block h1 {
+  font-family:'Rubik', Sans-serif;
+  font-size: 1.5em;
+  margin:0;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.cardImg .text-block h1 small {
+  font-size: .8em;
+  color:#ccc;
+}
+
+
+
+.cardImg .text-block button {
+	transition:all 0.35s cubic-bezier(0.37, 0.26, 0.35, 1);
+	border:4px solid #fff;
+	background:transparent;
+	font-family:'Rubik', Sans-serif;
+	text-transform:uppercase;
+	font-weight:700;
+	cursor:pointer;
+}
+h3,p{
+    font-weight: bold;
+}
+button{
+    width: 10em;
+    height: 2.2em;
+}
+.cardImg .text-block button:hover {
+	background:#004c56;
+}
+
+@media (max-width: 410px){
+    .cardImg .text-block h1 {
+
+        font-size: 1.3em;
+
+    }
+    .cardImg{
+        height: 13em;
+    }
+}
+@media (max-width: 385px){
+    .cardImg .text-block h1 {
+
+        font-size: 1.9em;
+
+    }
+}

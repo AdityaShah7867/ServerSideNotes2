@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block content %}
+
+          <!-- content goes here -->
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Container Example</title>
+              <style>
+                #container {
+                  margin-top: 50px;
+                  width: 950px;
+                  height: 800px;
+                  /* background-color: #78e1f3; */
+                  border: 1px solid #ccc;
+                  padding: 20px;
+                  margin: 20px auto;
+                }
+                .row{
+                    color: rgb(17, 230, 219);
+                }
+              </style>
+            </head>
+            <body>
+              <div id="container">
+                <!-- content goes here -->
+             
+          
+    
+    <div class="row" style="margin-top: 5%; ">
+        <h3>Reply section  of {{note}}</h3>
+        <br><br><br><br>
+        {% for x in cmnt %}
+       
+            <p><b>{{x.frR}}</b> Replied :- &nbsp;&nbsp;&nbsp;<a style="color: rgb(83, 235, 146);">{{x.cmntR}}</a></p>
+            <p style="font-size: 30px;"></p>
+    
+
+
+            
+        {% endfor %}
+    </div>
+
+
+
+</div>
+</body>
+</html>
+
+
+
+{% endblock %}

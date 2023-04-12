@@ -1,0 +1,109 @@
+{% extends 'index.html' %} {% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/land.css' %}" />
+
+<style>
+  .desc {
+    padding: 0.5em 2em;
+  }
+  .btn {
+    width: 10em;
+  }
+  .header {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+      url("/static/images/LHOMES.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .text-box {
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .text-box h1 {
+    font-size: 66px;
+    overflow: hidden;
+  }
+
+  .text-box p {
+    margin: 10px 0 40px;
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .h-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 16px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .h-btn:hover {
+    border: 1px solid #f44336;
+    background: #f44336;
+    transition: 1s;
+  }
+
+  nav .bx {
+    display: none;
+  }
+
+  button {
+    padding: 1.3em 3em;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #23c483;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+  }
+
+  button:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+  button:active {
+    transform: translateY(-1px);
+  }
+</style>
+{% include 'authentication/messages.html' %}
+
+<div class="header">
+  <div class="text-box">
+    <h2>GET YOUR NOTES</h2>
+    <p>BY COMMUNITY FOR COMMUNITY</p>
+
+    <a style="text-decoration: none" href="{% url 'notes' %}">
+      <button>
+        <b>GET NOTES</b>
+      </button></a
+    >
+  </div>
+</div>
+
+{% endblock %}

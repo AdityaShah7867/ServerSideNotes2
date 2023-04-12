@@ -1,0 +1,33 @@
+{% extends 'index.html' %} 
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/noteslikes.css' %}" />
+
+<div>
+  <table class="table table-hover">
+    <thead>
+      <tr style="color:black">
+        <th scope="col">Sr. No</th>
+        <th scope="col">File Name</th>
+        <th scope="col">No of Likes</th>
+      </tr>
+    </thead>
+    <tbody style="color:black">
+      {% for note, num_likes in notes_with_likes %}
+      <tr>
+        <td scope="row">{{forloop.counter}}</td>
+        <td>{{note.typeN}} of Module {{note.mod}} - {{note.sub}}</td>
+        {% if x.status %} {% endif %}
+        <button class="card-link" class="btn btn-success">
+          <td>likes({{ num_likes }})</td>
+        </button>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+ {% endblock %}
+
+
+

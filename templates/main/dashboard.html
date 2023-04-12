@@ -1,0 +1,268 @@
+{% load static %}
+{% block content %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4069479310852182"
+     crossorigin="anonymous"></script>
+	<title>DASHBOARD</title>
+	<link rel="stylesheet" href="{% static 'css/dash.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/res.css' %}" />
+    <link href="{% static 'images/notees.png' %}" rel="icon" type="image/x-icon" >
+
+
+<style>
+	a{
+		color: black;
+		text-decoration: none;
+	}
+
+</style>
+
+
+	<!-- for header part -->
+	<header>
+
+		<div class="logosec">
+			<a href="{% url 'notes'%}">
+			<div class="logo">NOTES 2.0</div></a>
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+				class="icn menuicn"
+				id="menuicn"
+				alt="menu-icon">
+		</div>
+
+<!--------------------------------------------------------->
+
+
+
+
+		<div class="message">
+			<!-- <div class="circle"></div> -->
+		<a href="{% url 'reminder_list' %}">
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
+				class="icn"
+				alt="">
+		</a>
+<!---------------------------------------------->
+
+				<h3 > COINS : {{user.coins_scored}} </h3>
+
+				<p><Strong style="color: #3f0097;">{{user.name}}</Strong></p>
+			<div class="dp">
+
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+					class="dpicn"
+					alt="dp">
+			</div>
+		</div>
+
+	</header>
+
+	<div class="main-container">
+		<div class="navcontainer">
+			<nav class="nav">
+				<div class="nav-upper-options">
+					<div class="nav-option option1">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+							class="nav-img"
+							alt="dashboard">
+						<h3> Dashboard</h3>
+					</div>
+					<a href="{% url 'addNotes' %}">
+                    <div class="nav-option option3">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
+							class="nav-img"
+							alt="report">
+						<h3> Add Notes</h3>
+					</div>
+				</a>
+				<a href="{% url 'status' %}">
+					<div class="option2 nav-option">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+							class="nav-img"
+							alt="articles">
+						<h3> Notes Status</h3>
+					</div>
+				</a>
+
+
+<!--
+					<div class="nav-option option4">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
+							class="nav-img"
+							alt="institution">
+						<h3> Institution</h3>
+					</div> -->
+
+					<a href="{% url 'notesbought' %}">
+
+					<div class="nav-option option5">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
+							class="nav-img"
+							alt="blog">
+						<h3> NOTES BOUGHT</h3>
+					</div></a>
+
+					<a href="{% url 'bookmark' %}">
+					<div class="nav-option option6">
+<svg width="50px" height="50px" viewBox="0 0 20.00 20.00" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>bookmark_plus_fill [#1237]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-265.000000, -2639.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M216,2486 L215,2486 L215,2487 C215,2487.552 214.552,2488 214,2488 C213.448,2488 213,2487.552 213,2487 L213,2486 L212,2486 C211.448,2486 211,2485.552 211,2485 C211,2484.448 211.448,2484 212,2484 L213,2484 L213,2483 C213,2482.448 213.448,2482 214,2482 C214.552,2482 215,2482.448 215,2483 L215,2484 L216,2484 C216.552,2484 217,2484.448 217,2485 C217,2485.552 216.552,2486 216,2486 M217,2479 L211,2479 C209.895,2479 209,2479.895 209,2481 L209,2497.998 C209,2498.889 210.077,2499.335 210.707,2498.705 L213.293,2496.119 C213.683,2495.729 214.317,2495.729 214.707,2496.119 L217.293,2498.705 C217.923,2499.335 219,2498.889 219,2497.998 L219,2481 C219,2479.895 218.105,2479 217,2479" id="bookmark_plus_fill-[#1237]"> </path> </g> </g> </g> </g></svg>
+
+					<h3> BOOKMARKED
+							NOTES
+						</h3>
+					</div></a>
+
+
+					<a href="{% url 'logout' %}">
+					<div class="nav-option logout">
+						<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+							class="nav-img"
+							alt="logout">
+						<h3>Logout</h3>
+					</div>
+					</a>
+
+				</div>
+			</nav>
+		</div>
+		<div class="main">
+
+			<div class="searchbar2">
+				<input type="text"
+					name=""
+					id=""
+					placeholder="Search">
+				<div class="searchbtn">
+				<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
+						class="icn srchicn"
+						alt="search-button">
+				</div>
+			</div>
+
+			<div class="box-container">
+
+				<div class="box box1">
+					<a href="{% url 'leaderboard' %}" style="text-decoration: none;">
+					<div class="text">
+						<h2 style="color: aliceblue;" class="topic-heading">{{user.rank}}</h2>
+						<h2  style="color: aliceblue;" class="topic">Leaderboard Rank</h2>
+					</a>
+					</div>
+
+<svg fill="#ffffff" height="67px" width="67px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.7 488.7" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M441.95,441.5c-0.7,0.9-0.7,2.1,0,3l22.4,27.3c2,2.4,0.3,6-2.8,6h-80.1v-70.2h80.3c3.1,0,4.8,3.6,2.8,5.9L441.95,441.5z M24.45,413.5l22.4,27.3c0.7,0.9,0.7,2.1,0,3l-22.6,28c-1.9,2.4-0.2,5.9,2.8,5.9h80.4v-70.2h-80.1 C24.25,407.5,22.55,411.1,24.45,413.5z M384.75,44.9h96v73.7c0,52.9-43.1,96-96,96h-12.5c-18.1,40-54.4,70-98.3,79.4v60.2h34.5 c10.6,0,19.2,8.6,19.2,19.2v25.2h29.4v90.1h-225.3v-90.1h29.4v-25.2c0-10.6,8.6-19.2,19.2-19.2h34.4V294 c-43.9-9.4-80.2-39.4-98.3-79.4h-12.5c-52.9,0-96-43.1-96-96V44.9h96V0h280.6v44.9H384.75z M104.45,166c-0.2-3-0.3-6.1-0.3-9.2 V93.5h-47.4v25.1c0,26.1,21.3,47.4,47.4,47.4H104.45z M205.45,403.2v48.3h78v-48.3H205.45z M231.35,106.7c0-4.3,1.1-7.8,3.3-10.6 c2.2-2.8,5.5-4.2,10.1-4.2c4.5,0,8.1,1.7,10.8,5.1c2.1,2.7,3.4,6.5,3.9,11.5c0.2,2.2,2.2,3.9,4.5,3.9h0.1l23-0.3 c2.5,0,4.6-2.1,4.5-4.6c-0.6-9.9-3.8-18.3-9.7-25c-6.1-7-14.1-11.5-24.2-13.5V51.8c0-2.1-1.7-3.8-3.9-3.8h-14 c-2.1,0-3.9,1.7-3.9,3.8v16.6c-10.6,1.5-19.3,5.4-25.9,11.7c-7.3,6.9-10.9,15.8-10.9,26.5c0,11.8,3.4,20.8,10.3,26.9 c6.9,6.1,17.9,12.1,33,18.1c6.2,2.7,10.5,5.4,13,8.1c2.4,2.8,3.6,6.6,3.6,11.6c0,4.3-1.2,7.8-3.6,10.4c-2.4,2.7-5.9,4-10.5,4 c-5.5,0-10-1.7-13.4-5.2c-2.8-2.8-4.5-7.2-5-13c-0.2-2.2-2.2-3.9-4.5-3.9h-0.1l-23,0.4c-2.5,0-4.6,2.1-4.5,4.6 c0.6,12,4.5,21.4,11.8,27.9c7.9,7.1,17.8,11.3,29.6,12.7v15.5c0,2.1,1.7,3.8,3.9,3.8h14c2.1,0,3.9-1.7,3.9-3.8v-16 c9.5-1.7,17.2-5.4,23.2-11.1c7-6.7,10.5-15.6,10.5-26.6c0-11.6-3.5-20.5-10.5-26.7s-17.9-12.5-32.7-18.8 c-6.4-2.8-10.8-5.5-13.1-8.3C232.55,114.7,231.35,111.1,231.35,106.7z M384.75,93.5v63.3c0,3.1-0.1,6.1-0.3,9.2h0.3 c26.1,0,47.4-21.3,47.4-47.4V93.5L384.75,93.5L384.75,93.5z"></path> </g> </g></svg></div>
+<!-------------------------------------------------------------------------->
+				<div class="box box2">
+
+
+					<div class="text">
+
+
+						<h2  style="color: aliceblue;" class="topic-heading">{{note_likes}}</h2>
+						<h2  style="color: aliceblue;" class="topic">Likes</h2>
+
+					</div>
+
+
+					<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+						alt="likes">
+				</div>
+<!------------------------------------------------------------>
+				<div class="box box3">
+
+					<div class="text">
+						<h2 class="topic-heading">{{request.user.coins_scored}}</h2>
+						<h2 class="topic">Current Coins</h2>
+					</div>
+
+
+<svg fill="#ffffff" width="88px" height="88px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Icon"> <path d="M16,2.75c-7.313,-0 -13.25,5.937 -13.25,13.25c-0,7.313 5.937,13.25 13.25,13.25c7.313,0 13.25,-5.937 13.25,-13.25c-0,-7.313 -5.937,-13.25 -13.25,-13.25Zm-0,2c6.209,-0 11.25,5.041 11.25,11.25c-0,6.209 -5.041,11.25 -11.25,11.25c-6.209,0 -11.25,-5.041 -11.25,-11.25c-0,-6.209 5.041,-11.25 11.25,-11.25Zm-1,5.994l-0,-1.244c0,-0.552 0.448,-1 1,-1c0.552,0 1,0.448 1,1l-0,1.312c0.176,0.03 0.347,0.066 0.51,0.109c0.537,0.14 0.985,0.327 1.344,0.562c0.359,0.235 0.632,0.496 0.82,0.781c0.187,0.286 0.281,0.566 0.281,0.839c-0,0.299 -0.1,0.543 -0.3,0.734c-0.201,0.19 -0.485,0.286 -0.853,0.286c-0.267,-0 -0.494,-0.077 -0.682,-0.229c-0.187,-0.152 -0.402,-0.381 -0.643,-0.686c-0.141,-0.182 -0.3,-0.338 -0.477,-0.468l-0,2.221c0.772,0.193 1.406,0.422 1.902,0.686c0.511,0.274 0.899,0.596 1.162,0.968c0.264,0.371 0.396,0.795 0.396,1.272c-0,0.718 -0.175,1.332 -0.524,1.844c-0.35,0.511 -0.866,0.899 -1.549,1.162c-0.409,0.158 -0.872,0.269 -1.387,0.332l-0,1.275c0,0.552 -0.448,1 -1,1c-0.552,0 -1,-0.448 -1,-1l-0,-1.259c-0.561,-0.064 -1.063,-0.191 -1.506,-0.381c-0.667,-0.286 -1.16,-0.643 -1.477,-1.072c-0.318,-0.429 -0.477,-0.859 -0.477,-1.291c0,-0.286 0.102,-0.531 0.305,-0.734c0.203,-0.203 0.461,-0.305 0.772,-0.305c0.273,-0 0.483,0.067 0.629,0.2c0.146,0.134 0.286,0.321 0.419,0.562c0.267,0.464 0.586,0.81 0.958,1.039c0.113,0.07 0.239,0.129 0.377,0.177l-0,-2.763c-0.586,-0.166 -1.083,-0.338 -1.492,-0.516c-0.562,-0.244 -1.012,-0.567 -1.348,-0.967c-0.337,-0.4 -0.505,-0.893 -0.505,-1.477c-0,-0.521 0.155,-1.013 0.467,-1.477c0.311,-0.464 0.77,-0.834 1.377,-1.11c0.435,-0.199 0.936,-0.326 1.501,-0.382Zm2,6.514c0.159,0.066 0.294,0.132 0.406,0.2c0.346,0.21 0.519,0.543 0.519,1.001c-0,0.298 -0.167,0.563 -0.5,0.795c-0.128,0.089 -0.27,0.161 -0.425,0.216l-0,-2.212Zm-2,-4.8l-0,1.955c-0.24,-0.093 -0.44,-0.201 -0.601,-0.324c-0.229,-0.174 -0.343,-0.398 -0.343,-0.671c0,-0.299 0.156,-0.548 0.467,-0.749c0.142,-0.091 0.301,-0.162 0.477,-0.211Zm-7.077,0.926c0.171,-0.41 0.064,-0.197 0.357,-0.71c0.273,-0.479 0.106,-1.09 -0.374,-1.364c-0.479,-0.273 -1.091,-0.106 -1.364,0.374c-0.383,0.672 -0.241,0.393 -0.465,0.932c-0.212,0.509 0.029,1.095 0.539,1.307c0.509,0.212 1.095,-0.029 1.307,-0.539Zm1.633,-2.493c0.445,-0.593 0.951,-1.077 1.444,-1.474c0.275,-0.222 0.546,-0.416 0.8,-0.586c0.459,-0.308 0.581,-0.929 0.274,-1.388c-0.307,-0.458 -0.929,-0.581 -1.387,-0.274c-0.867,0.582 -1.885,1.395 -2.73,2.521c-0.332,0.442 -0.242,1.069 0.199,1.4c0.441,0.332 1.069,0.242 1.4,-0.199Z"></path> </g> </g></svg>
+				</div>
+
+
+				<div class="box box4">
+					<a href="{% url 'notesuploded' %}" style="text-decoration: none;">
+					<div class="text">
+						<h2 style="color: aliceblue;"  class="topic-heading">{{notes.count}}</h2>
+
+						<h2 style="color: aliceblue;" class="topic"> Notes Uploaded</h2>
+						</a>
+
+					</div>
+
+
+					<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
+				</div>
+			</div>
+
+			<div class="report-container">
+				<div class="report-header">
+					<h1 class="recent-Articles">Leaderboard Top 10</h1>
+					<a href="{% url 'leaderboard' %}" style="text-decoration: none;"><button class="view">View All {{user_count}}</button></a>
+				</div>
+
+				<div class="report-body">
+					<div class="report-topic-heading">
+						<h3 class="t-op">Rank</h3>
+						<h3 class="t-op">Name</h3>
+						<h3 class="t-op">Coins</h3>
+					</div>
+
+					<div class="items">
+						{% for user in users %}
+						<div class="item1">
+							<h3 class="t-op-nextlvl">{{ user.rank }}</h3>
+							<h3 class="t-op-nextlvl">{{ user.name }}</h3>
+							<h3 class="t-op-nextlvl">{{ user.coins_scored }}</h3>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+
+	</div>
+
+	</div>
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  ...
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div> -->
+
+
+
+
+  <script>
+	let menuicn = document.querySelector(".menuicn");
+let nav = document.querySelector(".navcontainer");
+
+menuicn.addEventListener("click",()=>
+{
+    nav.classList.toggle("navclose");
+})
+  </script>
+{% endblock %}
