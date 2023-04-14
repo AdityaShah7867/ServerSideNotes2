@@ -1,0 +1,58 @@
+.
+├── authentication
+│   ├── 404.html
+│   ├── activateFailed.html
+│   ├── activate.html
+│   ├── login.html
+│   ├── messages.html
+│   └── register.html
+├── components
+│   ├── card.html
+│   ├── cmntReply.html
+│   ├── filter.html
+│   ├── footer.html
+│   ├── header.html
+│   ├── notesBottomNav.html
+│   └── search.html
+├── index.html
+├── main
+│   ├── adminTem
+│   │   ├── add_reminder.html
+│   │   └── adminCrud.html
+│   ├── dashboard
+│   │   ├── bookmark.html
+│   │   ├── dashBlocks.html
+│   │   ├── dashboard.html
+│   │   ├── dashHeader.html
+│   │   ├── dashSideNav.html
+│   │   ├── leader.html
+│   │   ├── notesbought.html
+│   │   ├── notesuploded.html
+│   │   ├── status.html
+│   │   └── tenLeader.html
+│   ├── extras
+│   │   ├── about.html
+│   │   ├── reminder_list.html
+│   │   └── teacher.html
+│   ├── land.html
+│   ├── realhome.html
+│   ├── trash
+│   │   ├── 1realHome.html
+│   │   ├── addNotes1.html
+│   │   ├── addNotes2.html
+│   │   ├── dashboard1.html
+│   │   ├── header1.html
+│   │   ├── header2.html
+│   │   ├── land1.html
+│   │   ├── land2.html
+│   │   ├── leaderboard.html
+│   │   ├── newAddnotes.html
+│   │   ├── register1.html
+│   │   └── searchR.html
+│   └── userNotesOperations
+│       ├── addNotes.html
+│       ├── noteslikes.html
+│       └── noteViewer.html
+└── newTemplTree.txt
+
+8 directories, 47 files

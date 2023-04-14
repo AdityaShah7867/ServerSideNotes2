@@ -1,0 +1,47 @@
+
+<div class="row d-flex justify-content-center align-items-center">
+    {% for x in notes.qs %}
+
+
+      <div class="card cardImg mx-4 my-4" style="width: 22rem; height: 16em; background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 60%),url('{{x.sub.img.url}}');">
+
+        <div class="card-body">
+          <div class="text-block">
+            <h1 class="abcd">{{x.sub}}<small ><br>MOD : {{x.mod}} | {{x.typeN}}</small></h1>
+
+            <p>
+              LIKES: {{x.likes.count}}
+              <br>
+              CREDIT : {{x.author.name}}
+              <br>
+              DESC :{{x.desc}}
+            </p>
+            {% if request.user in x.buy.all %}
+            <form method="POST" action="{% url 'notesViewer' x.slug %}">
+              {% csrf_token %}
+              <a href="{{x.slug}}" class="card-link">
+                <button type="submit" class="btn btn-success">View PDF</button>
+              </a>
+            </form>
+
+            {% else %}
+            <form action="{% url 'buy_notes' x.pk %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="note_id" value="{{x.note_id}}">
+              <button class="btn btn-primary" type="submit">Buy Notes</button>
+            </form>
+            {% endif %}
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+    {% endfor %}
+  </div>
+
+
+</div>
+

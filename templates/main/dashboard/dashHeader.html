@@ -1,0 +1,52 @@
+
+
+<style>
+	a{
+		color: black;
+		text-decoration: none;
+	}
+
+</style>
+
+
+	<!-- for header part -->
+	<header>
+
+		<div class="logosec">
+			<a href="{% url 'notes'%}">
+			<div class="logo">NOTES 2.0</div></a>
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+				class="icn menuicn"
+				id="menuicn"
+				alt="menu-icon">
+		</div>
+
+<!--------------------------------------------------------->
+
+
+
+
+		<div class="message">
+			<!-- <div class="circle"></div> -->
+		<a href="{% url 'reminder_list' %}">
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
+				class="icn"
+				alt="">
+		</a>
+<!---------------------------------------------->
+
+				<h3 > COINS : {{user.coins_scored}} </h3>
+
+				<p><Strong style="color: #3f0097;">{{user.name}}</Strong></p>
+			<div class="dp">
+
+			<img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+					class="dpicn"
+					alt="dp">
+			</div>
+		</div>
+
+	</header>

@@ -25,15 +25,8 @@ from django.core.mail import EmailMessage
 # Create your views here.
 
 # for user in UserAccount.objects.all():
-#     if user.coins_scored<100:
-#         user.coins_scored +=50
-#         user.save()
-
-
-
-
-
-
+#     user.coins_scored +=100
+#     user.save()
 
 # for note in Notes.objects.all():
 #     note.desc = ""
@@ -111,10 +104,11 @@ def dashboard(request):
         'rank':rank,
         'users': users,
         'page_obj': page_obj,
-        'user_count':user_count
+        'user_count':user_count,
+        'mainBase': True,
 
     }
-    return render(request,'main/dashboard.html',context)
+    return render(request,'main/dashboard/dashboard.html',context)
 
 
 
@@ -155,7 +149,7 @@ def addNotes(request):
             messages.error(request,"Something went wrong please try again")
             return redirect('addNotes')
     else:
-        return render(request,'main/addNotes.html',context)
+        return render(request,'main/userNotesOperations/addNotes.html',context)
 
 
 #View for users to add notes ends here
@@ -179,6 +173,7 @@ def notes(request):
 
     context = {
         'notes': filteredNotes,
+
     }
 
     return render(request, 'main/realhome.html', context)
@@ -196,7 +191,7 @@ def status(request):
         'notes' : notes,
     }
 
-    return render(request,'main/status.html',context)
+    return render(request,'main/dashboard/status.html',context)
 
 #Status page table ends here
 
@@ -214,6 +209,58 @@ def noteDelete(request,slug):
 #deleting uploaded notes by the respective user itself ends here
 
 
+@login_required(login_url='/login/')
+def noteViewer(request, slug):
+    
+    notes = Notes.objects.filter(slug=slug)
+    note = get_object_or_404(Notes, slug=slug)
+    cmnt = Comment.objects.filter(toU = note.author)
+    total_comments = note.comment_set.count()
+
+
+    # Get the view count from the session, or initialize it if it doesn't exist
+    view_count = request.session.get('view_count', {})
+    if not view_count.get(slug):
+        view_count[slug] = 0
+    if request.user in note.buy.all():
+       if request.method == 'POST':
+           # Check if the bookmark button was clicked
+           if 'bookmark' in request.POST:
+               # Check if the user has already bookmarked the note
+               user = request.user
+               bookmarked_notes = user.bookmarks.all()
+               if note in bookmarked_notes:
+                   # Remove the bookmark
+                   user.bookmarks.remove(note)
+               else:
+                   # Add the bookmark
+                   user.bookmarks.add(note)
+           else:
+               # Increment the view count for the current note in the session
+               view_count[slug] += 1
+               request.session['view_count'] = view_count
+    else:
+        messages.error(request,"You have not buyed the note")
+        return redirect('notes')
+
+    # Check if the user has already bookmarked the note
+    user = request.user
+    bookmarked_notes = user.bookmarks.all()
+    is_bookmarked = note in bookmarked_notes
+
+    context = {
+        'notes': notes,
+        'note': note,
+        'view_count': view_count.get(slug, 0),
+        'is_bookmarked': is_bookmarked,
+        'cmnt' : cmnt,
+        'total_comments':total_comments
+    }
+    return render(request, 'main/userNotesOperations/noteViewer.html', context)
+
+
+
+
 
 @login_required(login_url='/login/')
 def searchNotes(request):
@@ -221,9 +268,9 @@ def searchNotes(request):
     if request.method == 'POST':
 
         searchQ = request.POST.get('searchQ')
-        notes = Notes.objects.filter(nDetail__contains = searchQ,status=True)
-
-        if searchQ =="":
+        note = Notes.objects.filter(nDetail__contains = searchQ,status=True)
+        notes = NoteFilter(request.GET, queryset = note)
+        if searchQ == "":
             messages.error(request,'Nothing to Search ')
             return render(request,'main/realhome.html')
 
@@ -233,12 +280,12 @@ def searchNotes(request):
                 'notes' : notes,
                 'ser' : searchQ
             }
-            return render(request,'main/searchR.html',context)
+            return render(request,'main/realhome.html',context)
         else:
-            return render(request,'main/searchR.html')
+            return render(request,'main/realhome.html')
 
     else:
-        return render(request,'main/searchR.html')
+        return render(request,'main/realhome.html')
 
 
 
@@ -332,61 +379,10 @@ def logoutR(request):
 
 
 
-@login_required(login_url='/login/')
-@login_required(login_url='/login/')
-def noteViewer(request, slug):
-    notes = Notes.objects.filter(slug=slug)
-    note = get_object_or_404(Notes, slug=slug)
-    cmnt = Comment.objects.filter(toU = note.author)
-    total_comments = note.comment_set.count()
-
-
-    # Get the view count from the session, or initialize it if it doesn't exist
-    view_count = request.session.get('view_count', {})
-    if not view_count.get(slug):
-        view_count[slug] = 0
-    if request.user in note.buy.all():
-       if request.method == 'POST':
-           # Check if the bookmark button was clicked
-           if 'bookmark' in request.POST:
-               # Check if the user has already bookmarked the note
-               user = request.user
-               bookmarked_notes = user.bookmarks.all()
-               if note in bookmarked_notes:
-                   # Remove the bookmark
-                   user.bookmarks.remove(note)
-               else:
-                   # Add the bookmark
-                   user.bookmarks.add(note)
-           else:
-               # Increment the view count for the current note in the session
-               view_count[slug] += 1
-               request.session['view_count'] = view_count
-    else:
-        messages.error(request,"You have not buyed the note")
-        return redirect('notes')
-
-    # Check if the user has already bookmarked the note
-    user = request.user
-    bookmarked_notes = user.bookmarks.all()
-    is_bookmarked = note in bookmarked_notes
-
-    context = {
-        'notes': notes,
-        'note': note,
-        'view_count': view_count.get(slug, 0),
-        'is_bookmarked': is_bookmarked,
-        'cmnt' : cmnt,
-        'total_comments':total_comments
-    }
-    return render(request, 'main/noteViewer.html', context)
-
-
-
 
 def aboutUs(request):
 
-    return render(request,'main/about.html')
+    return render(request,'main/extras/about.html')
 
 
 
@@ -396,37 +392,41 @@ def teacher(request):
     context={
         'sub':sub,
     }
-    return render(request,'main/teacher.html',context)
+    return render(request,'main/extras/teacher.html',context)
 
 
 
 #Bottom nav views starts here
 @login_required(login_url='/login/')
-def btmNav(request):
+def lectslides(request):
 
-    notes = Notes.objects.filter(typeN='LectureSlides',status = True)
-    return render(request,'main/btmNavSort.html',{'notes':notes})
+    note = Notes.objects.filter(typeN='LectureSlides',status = True)
+    notes = NoteFilter(request.GET, queryset=note)
+    return render(request,'main/realhome.html',{'notes':notes})
 
 @login_required(login_url='/login/')
 def refeBk(request):
 
-    notes = Notes.objects.filter(status=True,typeN='ReferenceBook')
-    return render(request,'main/btmNavSort.html',{'notes':notes})
+    note = Notes.objects.filter(status=True,typeN='ReferenceBook')
+    notes = NoteFilter(request.GET, queryset=note)
+    return render(request,'main/realhome.html',{'notes':notes})
 
 
 
 @login_required(login_url='/login/')
 def pyqA(request):
 
-    notes = Notes.objects.filter(status=True,typeN='PYQ')
-    return render(request,'main/btmNavSort.html',{'notes':notes})
+    note = Notes.objects.filter(status=True,typeN='PYQ')
+    notes = NoteFilter(request.GET, queryset=note)
+    return render(request,'main/realhome.html',{'notes':notes})
 
 @login_required(login_url='/login/')
 def Assignment(request):
 
-    notes = (Notes.objects.filter(status=True,typeN='Assignment') |
+    note = (Notes.objects.filter(status=True,typeN='Assignment') |
             Notes.objects.filter(status=True, typeN='Experiment'))
-    return render(request,'main/btmNavSort.html',{'notes':notes})
+    notes = NoteFilter(request.GET, queryset=note)
+    return render(request,'main/realhome.html',{'notes':notes})
 
 
 #bottom nav views ends here
@@ -483,7 +483,7 @@ def notesuploded(request):
         'num_likes': num_likes
     }
 
-    return render(request,'main/notesuploded.html',context)
+    return render(request,'main/dashboard/notesuploded.html',context)
 
 
 
@@ -517,7 +517,7 @@ def leaderboard(request):
         'page_obj': page_obj,
     }
 
-    return render(request, 'main/leader.html', context)
+    return render(request, 'main/dashboard/leader.html', context)
 
 
 
@@ -573,7 +573,7 @@ def notes_likes(request):
         'notes_with_likes': notes_with_likes,
         'num_likes':num_likes
     }
-    return render(request, 'main/noteslikes.html', context)
+    return render(request, 'main/userNotesOperation/noteslikes.html', context)
 
 def addDriveLink(request,slug):
 
@@ -611,7 +611,7 @@ def notesbought(request):
     context={
         'note':note
     }
-    return render(request,'main/notesbought.html',context)
+    return render(request,'main/dashboard/notesbought.html',context)
 
 
 @login_required
@@ -620,7 +620,7 @@ def bookmark(request):
     context = {
         'bookmarks': bookmarks,
     }
-    return render(request, 'main/bookmark.html', context)
+    return render(request, 'main/dashboard/bookmark.html', context)
 
 
 def cmntAll(request,slug):
@@ -695,9 +695,9 @@ def add_reminder(request):
             return redirect('reminder_list')
     else:
         form = ReminderForm()
-    return render(request, 'main/add_reminder.html', {'form': form})
+    return render(request, 'main/adminTem/add_reminder.html', {'form': form})
 
 
 def reminder_list(request):
     reminders = Reminder.objects.all()
-    return render(request, 'main/reminder_list.html', {'reminders': reminders})
+    return render(request, 'main/extras/reminder_list.html', {'reminders': reminders})

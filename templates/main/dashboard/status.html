@@ -1,0 +1,44 @@
+{% extends 'main/dashboard/dashboard.html' %}
+{% block content %}
+<div class="report-container">
+	<div class="report-header">
+		<h1 class="recent-Articles">Notes Status </h1>
+		<!-- <button class="view">View All</button> -->
+	</div>
+
+	<div class="report-body">
+		<div class="report-topic-heading">
+			<h3 class="t-op">Sr. No</h3>
+			<h3 class="t-op">File Name</h3>
+			<h3 class="t-op">Status</h3>
+			<h3 class="t-op">Action</h3>
+		</div>
+
+		<div class="items">
+			{% for x in notes %}
+			<div class="item1">
+				<h3 class="t-op-nextlvl">{{ forloop.counter }}</h3>
+				<h3 class="t-op-nextlvl">{{x.typeN}} of Module {{x.mod}} - {{x.sub}}</h3>
+				{% if x.status %}
+				<h3 class="t-op-nextlvl">Accepted</h3>
+				{% else %}
+				<h3 class="t-op-nextlvl">Under Scrutiny</h3>
+
+				{% endif %} {% if not x.status %}
+				<h3> <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+						data-bs-target="#exampleModal{{forloop.counter}}">
+						Delete
+					</button></h3>
+				{% else %}
+				<td style="color: rgb(57, 159, 43)">Thank You </td>
+				{% endif %}
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+
+
+</div>
+
+{% endblock %}

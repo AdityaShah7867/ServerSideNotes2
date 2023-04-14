@@ -1,0 +1,39 @@
+{% extends 'main/dashboard/dashboard.html' %}
+{% block content %}
+
+<div class="report-container">
+	<div class="report-header">
+		<h1 class="recent-Articles">Notes Bought </h1>
+		<!-- <button class="view">View All</button> -->
+	</div>
+
+	<div class="report-body">
+		<div class="report-topic-heading">
+			<h3 class="t-op">Sr. No</h3>
+			<h3 class="t-op">File Name</h3>
+			<h3 class="t-op">PDF</h3>
+
+		</div>
+
+		<div class="items">
+			{% for x in note %}
+			<div class="item1">
+				<h3 class="t-op-nextlvl">{{ forloop.counter }}</h3>
+				<h3 class="t-op-nextlvl">{{x.typeN}} of Module {{x.mod}} - {{x.sub}}</h3>
+				{% if x.status %}
+				<h3 class="t-op-nextlvl"><a href="{{ x.docid }}"><button style="background-color:rgb(24, 172, 103)">View
+							PDF</button></a></h3>
+				{% else %}
+
+
+
+				{% endif %}
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+
+
+</div>
+{% endblock %}

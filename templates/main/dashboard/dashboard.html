@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="{% static 'css/dash.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/res.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/paging.css' %}" />
+	<link href="{% static 'images/notees.png' %}" rel="icon" type="image/x-icon">
+</head>
+
+<body>
+	{% include 'main/dashboard/dashHeader.html' %}
+	
+	<div class="main-container">
+		{% include 'main/dashboard/dashSideNav.html' %}
+		<div class="main">
+			
+			{% block content %}
+				
+			{% if mainBase %}
+
+				{% include 'main/dashboard/dashBlocks.html' %}
+					
+				
+
+				{% include 'main/dashboard/tenLeader.html' %}
+					
+					
+					
+
+		
+			{% endif %}
+			{% endblock %}
+		</div>
+		
+
+		
+	</div>
+	
+			
+			
+		
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4069479310852182"
+		crossorigin="anonymous"></script>
+</body>
+
+<script>
+	let menuicn = document.querySelector(".menuicn");
+	let nav = document.querySelector(".navcontainer");
+
+	menuicn.addEventListener("click", () => {
+		nav.classList.toggle("navclose");
+	})
+</script>
+
+</html>
