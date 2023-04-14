@@ -29,13 +29,26 @@
 
 		<div class="message">
 			<!-- <div class="circle"></div> -->
-		<a href="{% url 'reminder_list' %}">
+		
 			<img src=
 "https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
-				class="icn"
+				class="icn show-btn"
 				alt="">
-		</a>
-<!---------------------------------------------->
+
+				<div class="abcd">
+					<div class="aditya">
+					   <div class="top-content">
+						  <div class="left-text">
+							 DUE DATES  <i class="fa-regular fa-calendar-check fa-bounce"></i>
+						  </div>
+						  <span class="close-icon" style="color: black;"><b><i class="fas fa-times"style="margin-left: -450px;"></i></b></span>
+						
+					   </div>
+					</div>
+				  </div>
+		</div>		  
+		
+<!-------------------------------------------->
 
 				<h3 > COINS : {{user.coins_scored}} </h3>
 
@@ -48,5 +61,18 @@
 					alt="dp">
 			</div>
 		</div>
-
+		<script>
+			$('.show-btn').click(function(){
+			  $('.aditya').toggleClass("show");
+			  $('.show-btn').addClass("disabled");
+			});
+			$('.close-icon').click(function(){
+			  $('.aditya').toggleClass("show");
+			  $('.show-btn').removeClass("disabled");
+			});
+			$('.close-btn').click(function(){
+			  $('.aditya').toggleClass("show");
+			  $('.show-btn').removeClass("disabled");
+			});
+		 </script>
 	</header>
