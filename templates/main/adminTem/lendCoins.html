@@ -70,14 +70,15 @@
         {% if request.user.is_superuser %}
             <h2>The below form is visible to all users (Don't reload this same page after sending coins)</h2>
         {% endif %}
-        <form action="{% url 'lendCoins' %}" method="post" class="formCoins" >
+        <form action="{% url 'lendCoins' %}" method="post" id="formData" class="formCoins" >
             {% csrf_token %}
             <div id="userEmails" class="autocomplete lendCoins input-group mb-3">
                 <label for="">Email</label>
                 <input
                   class="form-control me-2 userName"
                   type="text"
-                  name="userNameSrch"
+                  name="email"
+                  id="email"
                   placeholder="Search"
                   aria-label="Search"
             
@@ -86,7 +87,7 @@
 
 
                     <label for="">Amount of coins</label>
-                    <input type="number" name="coins" class="userName" id="">
+                    <input type="number" name="coins" class="userName" id="coin">
                     <div class="input-group-append">
                         <button class="btn btn-outline-success rbtn" id="btnLen" type="submit">
                           Send
@@ -108,7 +109,7 @@
        new Autocomplete('#userEmails', {
 
             search : input => {
-            const url2 = `/searchUser/?userNameSrch=${input}`
+            const url2 = `/searchUser/?email=${input}`
             return new Promise(resolve => {
                 fetch(url2)
                 .then(response => response.json())
@@ -119,5 +120,35 @@
             }
 
             })
+
+        
+            document.getElementById('formData').addEventListener("submit",function(e){
+                e.preventDefault();
+                email = document.getElementById('email').value;
+                coin = parseInt(document.getElementById('coin').value);
+                const formData = new FormData();
+                formData.append('email',email);
+                formData.append('coins',coin);
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                fetch('{% url "lendCoins" %}', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sameUser){
+                        alert("You can't send money to yourself")
+                    }else if(data.lessCoins){
+                        alert("Chacha O Chacha, you're short on coins")
+                    }else if(data.success){
+                        alert(`${email} coins increased by ${coin} coins`)
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            });
+
     </script>
 {% endblock %}

@@ -717,21 +717,39 @@ def reminder_list(request):
 def lendCoins(request):
 
     if request.method == "POST":
-        email = request.POST.get('userNameSrch')
+        email = request.POST.get('email')
         amnt = int(request.POST.get('coins'))
         try:
             user = UserAccount.objects.get(email=email)
             sender = request.user
+            if request.user == user:
+                messages.error(request,"You can't send money to yourself")
+                data = {
+                    'sameUser' : True
+                }
+                return JsonResponse(data,safe=False)
             if not request.user.is_superuser:
                 if sender.coins_scored < amnt:
-                    messages.error(request,"Chacha O Chacha your'e short on coins")
-                    return render(request,'main/adminTem/lendCoins.html')
+                    data = {
+                        'lessCoins' : True
+                    }
+                    return JsonResponse(data,safe=False)
                 else:
                     sender.coins_scored -= amnt
-            user.coins_scored += amnt
-            user.save()
-            messages.success(request,f"{user.name} coins increased by {amnt}")
-            return render(request,'main/adminTem/lendCoins.html')
+                    user.coins_scored += amnt
+                    user.save()
+                    sender.save()
+                    data = {
+                        'success' : True
+                    }
+                    return JsonResponse(data,safe=False)
+            else:
+                user.coins_scored += amnt
+                user.save()
+                data = {
+                    'success' : True
+                }
+                return JsonResponse(data,safe=False)
         except Exception as e:
             messages.error(request,e)
             print(e)
@@ -740,7 +758,7 @@ def lendCoins(request):
         return render(request,'main/adminTem/lendCoins.html')
 
 def searchUser(request):
-    userNames = request.GET.get('userNameSrch')
+    userNames = request.GET.get('email')
     rcmdList = []
     if userNames:
         names = UserAccount.objects.filter(email__icontains=userNames)
