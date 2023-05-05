@@ -715,13 +715,16 @@ def reminder_list(request):
 
 
 def lendCoins(request):
-
+    
     if request.method == "POST":
         email = request.POST.get('userNameSrch')
         amnt = int(request.POST.get('coins'))
         try:
             user = UserAccount.objects.get(email=email)
             sender = request.user
+            if user == sender: 
+                messages.error(request,"You cannot send coins to yourself")
+                return render(request,'main/adminTem/lendCoins.html')
             if not request.user.is_superuser:
                 if sender.coins_scored < amnt:
                     messages.error(request,"Chacha O Chacha your'e short on coins")
@@ -738,6 +741,7 @@ def lendCoins(request):
             return render(request,'main/adminTem/lendCoins.html')
     else:
         return render(request,'main/adminTem/lendCoins.html')
+
 
 def searchUser(request):
     userNames = request.GET.get('userNameSrch')
