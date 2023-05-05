@@ -47,6 +47,9 @@ urlpatterns = [
     path('addDriveLink/<slug:slug>/',views.addDriveLink,name='addDriveLink'),
     path('adminResponse/<slug:slug>/',views.upDelete,name='upDelete'),
     path('acceptStatus/<slug:slug>/',views.acceptStatus,name='acceptStatus'),
+    path('lendCoins/',views.lendCoins,name="lendCoins"),
+    path('lendToAll',views.sendToAll,name="lendToAll"),
+    path('searchUser/',views.searchUser,name="searchUser"),
     # Admin panel routing ends here
 
     # Dashboard routing starts here

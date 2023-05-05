@@ -297,29 +297,36 @@ def loginR(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = authenticate(email = email, password = password)
+        try:
 
-        if user is None:
-            messages.error(request,'user does not exist')
+
+            user = authenticate(email = email, password = password)
+
+            userExist = UserAccount.objects.get(email = email)
+
+            if email == "" or password == "" :
+                messages.error(request,f'Email or password cannot be blanked')
+                return render(request,'authentication/login.html')
+            elif userExist is None:
+                messages.error(request,'user does not exist')
+                return render(request,'authentication/login.html')
+            elif user is None:
+                messages.error(request,'Invalid Credentials')
+                return render(request,'authentication/login.html')
+            elif not user.is_emailVerified:
+                messages.error(request,f'Email is not verified please check your {email} inbox')
+                return render(request,'authentication/login.html')
+            elif user is not None:
+                login(request,user)
+                messages.success(request,'Logged In Successfully')
+                return redirect('notes')
+        except Exception as e:
+            messages.error(request,f'Something went wrong')
             return render(request,'authentication/login.html')
 
-        if email == "" or password == "" :
-            messages.error(request,f'Email or password cannot be blanked')
-            return render(request,'authentication/login.html')
 
-
-        if not user.is_emailVerified:
-            messages.error(request,f'Email is not verified please check your {email} inbox')
-            return render(request,'authentication/login.html')
-
-        if user is not None:
-            login(request,user)
-            messages.success(request,'Logged In Successfully')
-            return redirect('notes')
-
-        else:
-            messages.error(request,'Invalid Credentials')
-            return render(request,'authentication/login.html')
+            
+            
 
     else:
         return render(request,'authentication/login.html')
@@ -357,13 +364,17 @@ def registerR(request):
         if len(password) < 6:
             messages.warning(request,'Password should be at least 6 characters.')
             return render(request,'authentication/register.html')
+        
+        try:
+            myuser = UserAccount.objects.create_user(email, name, password)
+            myuser.save()
+            send_activation_email(myuser,request)
+            messages.success(request,f'We have sent you an email on {email} check your inbox')
+            return redirect('loginR')
+        except Exception as e:
+            messages.error(request,f'Something went wrong')
+            return render(request,'authentication/register.html')
 
-
-        myuser = UserAccount.objects.create_user(email, name, password)
-        myuser.save()
-        send_activation_email(myuser,request)
-        messages.success(request,f'We have sent you an email on {email} check your inbox')
-        return redirect('loginR')
 
     else:
         return render(request,'authentication/register.html')
@@ -701,3 +712,55 @@ def add_reminder(request):
 def reminder_list(request):
     reminders = Reminder.objects.all()
     return render(request, 'main/extras/reminder_list.html', {'reminders': reminders})
+
+
+def lendCoins(request):
+
+    if request.method == "POST":
+        email = request.POST.get('userNameSrch')
+        amnt = int(request.POST.get('coins'))
+        try:
+            user = UserAccount.objects.get(email=email)
+            sender = request.user
+            if not request.user.is_superuser:
+                if sender.coins_scored < amnt:
+                    messages.error(request,"Chacha O Chacha your'e short on coins")
+                    return render(request,'main/adminTem/lendCoins.html')
+                else:
+                    sender.coins_scored -= amnt
+            user.coins_scored += amnt
+            user.save()
+            messages.success(request,f"{user.name} coins increased by {amnt}")
+            return render(request,'main/adminTem/lendCoins.html')
+        except Exception as e:
+            messages.error(request,e)
+            print(e)
+            return render(request,'main/adminTem/lendCoins.html')
+    else:
+        return render(request,'main/adminTem/lendCoins.html')
+
+def searchUser(request):
+    userNames = request.GET.get('userNameSrch')
+    rcmdList = []
+    if userNames:
+        names = UserAccount.objects.filter(email__icontains=userNames)
+
+        for u in names:
+            rcmdList.append(u.email)
+
+    return JsonResponse({'status':200 , 'data' : rcmdList})
+
+def sendToAll(request):
+
+    coins = int(request.POST.get('allCoins'))
+
+    try:
+
+        for user in UserAccount.objects.all():
+            user.coins_scored +=coins
+            user.save()
+        messages.success(request,f"Donated {coins} coins to all accounts")
+        return redirect('lendCoins')
+    except Exception as e:
+        messages.error(request,e)
+        return redirect('lendCoins')

@@ -1,0 +1,123 @@
+{% extends 'main/dashboard/dashboard.html' %}
+{% block content %}
+
+<style>
+    .lendCoins{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2em 2em;
+    }
+    .userName{
+        display: flex;
+        max-width: 20em;
+        height: 3em;
+        border-radius: 0.8em;
+        font-size: 1.2em;
+        margin: 2em 2em;
+    }
+    .formCoins{
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (max-width: 500px){
+
+       .userName{
+        width: 16em;
+        font-size: 1.1em;
+       }
+
+    }
+
+    @media (max-width: 380px){
+
+        .userName{
+            width: 14em;
+            font-size: 0.9em;
+        }
+
+        #btnLen{
+
+            width: 5.8em;
+            font-size: 0.8em;
+            margin: 0 1em;
+        }
+
+    }
+
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css" />
+
+    {% if request.user.is_superuser%}
+
+
+        <form action="{% url 'lendToAll' %}" method="post">
+            {% csrf_token %}
+            <h2>Visible only to superuser,This process takes some time please wait till the page reloads</h2>
+            <label for="">Send coins to all</label>
+            <input type="no" name="allCoins" id="">
+            <button type="submit">Send to all</button>
+        </form>
+    {% endif %}
+
+    
+
+    <div class="lendCoins">
+        {% include 'authentication/messages.html' %}
+        {% if request.user.is_superuser %}
+            <h2>The below form is visible to all users (Don't reload this same page after sending coins)</h2>
+        {% endif %}
+        <form action="{% url 'lendCoins' %}" method="post" class="formCoins" >
+            {% csrf_token %}
+            <div id="userEmails" class="autocomplete lendCoins input-group mb-3">
+                <label for="">Email</label>
+                <input
+                  class="form-control me-2 userName"
+                  type="text"
+                  name="userNameSrch"
+                  placeholder="Search"
+                  aria-label="Search"
+            
+                />
+                <ul class="autocomplete-result-list"></ul>  
+
+
+                    <label for="">Amount of coins</label>
+                    <input type="number" name="coins" class="userName" id="">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success rbtn" id="btnLen" type="submit">
+                          Send
+                        </button>
+                        
+                    </div>  
+
+                
+                           
+        </form>
+    </div>
+            
+   
+
+  
+
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <script>
+       new Autocomplete('#userEmails', {
+
+            search : input => {
+            const url2 = `/searchUser/?userNameSrch=${input}`
+            return new Promise(resolve => {
+                fetch(url2)
+                .then(response => response.json())
+                .then(data => {
+                resolve(data.data)
+                })
+            })
+            }
+
+            })
+    </script>
+{% endblock %}
