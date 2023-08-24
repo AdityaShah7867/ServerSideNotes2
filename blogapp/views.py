@@ -287,15 +287,15 @@ def registerR(request):
         password = request.POST.get('password')
 
 
-        if not email.endswith('@vcet.edu.in'):
-            messages.warning(request,'Only users with vcet.edu.in domain email addresses are allowed to register.')
-            return render(request, 'authentication/register.html')
-
-        # try:
-        #     validate_email(email)
-        # except ValidationError:
-        #     messages.warning(request,'Invalid email address.')
+        # if not email.endswith('@vcet.edu.in'):
+        #     messages.warning(request,'Only users with vcet.edu.in domain email addresses are allowed to register.')
         #     return render(request, 'authentication/register.html')
+
+        try:
+            validate_email(email)
+        except ValidationError:
+            messages.warning(request,'Invalid email address.')
+            return render(request, 'authentication/register.html')
 
 
         if UserAccount.objects.filter(email=email).exists():
