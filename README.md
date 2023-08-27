@@ -1,7 +1,7 @@
 Login page:-
 ![image](https://github.com/AdityaShah7867/ServerSideNotes2/assets/121731399/9c4c3f46-6692-404f-b04f-8d9bc9c48861)
 
-Home page:_
+Home page:-
 ![image](https://github.com/AdityaShah7867/ServerSideNotes2/assets/121731399/a8596fcd-28b5-41db-a451-8b00e5ad25b5)
 
 DashBoard:-
